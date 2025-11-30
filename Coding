@@ -1,0 +1,725 @@
+list, tuples and dictionary. 
+
+CODING: 
+#list 
+mylist = ["Apple","Orange","Mango"] 
+print("List : ",mylist) 
+mylist.append("Kiwi") 
+mylist.insert(2,"Grapes") 
+print("List after adding elements : ",mylist) 
+mylist.reverse() 
+print("List after reversing elements : ",mylist) 
+print("Number of elements in mylist : ",len(mylist)) 
+#tuple 
+mytuple = ("Cherry","Banana","Pomogranade") 
+print("Tuple : ",mytuple) 
+print("Index of Cherry ",mytuple.index("Cherry")) 
+print("Length of Tuple : ",len(mytuple)) 
+#Dictionary                                                                                                                                 
+mydict = {'name' : "John Doe",'age' : 19 } 
+print("Dictionary : ",mydict) 
+print("Dictionary keys : ",mydict.keys()) 
+print("Dictionary values : ",mydict.values())
+
+
+
+conditional statement of python. 
+CODING : 
+opr = input("Please enter an operator [ + , - , * , / ] : ") 
+if(opr == '*' or opr == '-' or opr == '+' or opr == '/'): 
+    n1 = int(input("Enter the first number : ")) 
+    n2 = int(input("Enter the second number : ")) 
+    if(opr == '+'): 
+        sum = n1 + n2 
+        print(f"{n1} + {n2} = {sum}") 
+    elif(opr == '-'): 
+        diff = n1 - n2 
+        print(f"{n1} - {n2} = {diff}") 
+    elif(opr == '*'): 
+        mul = n1 * n2 
+        print(f"{n1} * {n2} = {mul}") 
+    elif(opr == '/'): 
+        if(n1 == 0 or n2 == 0): 
+            print("Numbers must be positive") 
+        else: 
+            div = n1 / n2; 
+            print(f"{n1} / {n2} = {div}") 
+else: 
+    print("Invalid operator") 
+
+
+
+
+exception handling. 
+
+try: 
+    n1 = int(input("Enter first number : ")) 
+    n2 = int(input("Enter second number : ")) 
+    div = n1 / n2 
+except ValueError: 
+    print("Enter valid numbers ") 
+except ZeroDivisionError: 
+    print("Enter a non-zero divisor") 
+else: 
+    print(f"{n1} / {n2} = {div}") 
+finally:  
+    print("Program finished")
+
+
+
+
+ packages in python. 
+
+CODING : 
+ 
+From datetime import  * 
+from dateutil.relativedelta import * 
+now = datetime.now() 
+print(now) 
+ 
+import requests 
+r = requests.get("https://google.com/") 
+print(r.status_code) 
+print(r.headers) 
+print(r.encoding) 
+import numpy as np 
+a = np.array([[1+2j,2+1j],[3,4]]) 
+b = np.array([[5,6+6j],[7,8+4j]]) 
+print(a+b) 
+print(np.conj(a)) 
+ 
+import pandas as pd 
+df_1 = pd.DataFrame({"col1" : [1,2],"col2" : [3,4]}) 
+df_2 = pd.DataFrame({"col3" : [5,6],"col4" : [7,8]}) 
+df = pd.concat([df_1,df_2],axis=1) 
+print(df[df.col3==5]) 
+ 
+from scipy.interpolate import interp1d 
+import numpy as np 
+import pylab 
+x = np.linspace(0.1,10) 
+y = np.exp(x) / np.cos(np.pi * x) 
+f_nearest = interp1d(x,y,kind = "nearest") 
+f_linear = interp1d(x,y) 
+f_cubic = interp1d(x,y,kind="cubic") 
+x2 = np.linspace(0.7,10) 
+pylab.plot(x,y,"o",label="data points") 
+pylab.plot(x2,f_nearest(x2),label="nearest") 
+pylab.plot(x2,f_linear(x2),label="linear") 
+pylab.plot(x2,f_cubic(x2),label="cubic") 
+pylab.legend() 
+pylab.show() 
+
+
+functions in python. 
+
+CODING : 
+ 
+def fun(): 
+    print("Welcome to the cybercops") 
+fun() 
+ 
+def add(x,y): 
+    return x + y 
+def subtract(x,y): 
+    return x - y 
+def multiply(x,y): 
+    return x * y 
+def divide(x,y): 
+    return x / y 
+print("Select Operation") 
+print("1.Add") 
+print("2.Subtract") 
+print("3.Multiply") 
+print("4.Divide") 
+ 
+while True: 
+    choice = input("Enter choice (1/2/3/4): ") 
+    if choice in ('1','2','3','4'): 
+        num1 = float(input("Enter first number : ")) 
+        num2 = float(input("Enter second number : ")) 
+        if choice == '1': 
+            print(num1,"+",num2,"=",add(num1,num2)) 
+        elif choice == '2': 
+            print(num1,"-",num2,"=",subtract(num1,num2)) 
+        elif choice == '3': 
+            print(num1,"*",num2,"=",multiply(num1,num2)) 
+        elif choice == '4': 
+            print(num1,"/",num2,"=",divide(num1,num2)) 
+        next_calculation = input("Do next calculation ? (y/n) : ") 
+        if next_calculation == 'n': 
+            break 
+    else: 
+        print("Invalid input") 
+
+
+
+
+
+ port scanning.
+CODING : 
+ 
+import socket 
+import sys 
+def scanHost(ip, startPort, endPort): 
+    print('[*] Starting TCP port scan on host %s' % ip) 
+    tcp_scan(ip, startPort, endPort) 
+    print('[+] TCP scan on host %s complete' % ip) 
+ 
+def tcp_scan(ip, startPort, endPort): 
+ 
+    for port in range(startPort, endPort + 1): 
+        try: 
+            tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)              
+            if not tcp.connect_ex((ip, port)): 
+                print('[+] %s:%d/TCP Open' % (ip, port)) 
+                tcp.close() 
+                 
+        except Exception: 
+            pass 
+ 
+if __name__ == '__main__': 
+    socket.setdefaulttimeout(1) 
+    target   = input("Enter the hostname : ") 
+    ip = socket.gethostbyname(target) 
+    startPort = int(input("Enter the start port : ")) 
+    endPort   = int(input("Enter the end port: ")) 
+    scanHost(ip, startPort, endPort) 
+
+
+
+
+transmission of traffic in the network.
+CODING : 
+ 
+Server.py 
+import socket 
+def start_server(host='localhost', port=65432): 
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket: 
+        server_socket.bind((host, port)) 
+        server_socket.listen() 
+        print(f"Server listening on {host}:{port}") 
+         
+        conn, addr = server_socket.accept() 
+        with conn: 
+            print(f"Connected by {addr}") 
+            while True:  
+                data = conn.recv(1024) 
+                if not data: 
+                    break 
+                print(f"Received: {data.decode()}") 
+ 
+if __name__ == "__main__": 
+    start_server() 
+ 
+Client.py  
+import socket 
+def send_message(host='localhost', port=65432, message='Hello, Server!'): 
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket: 
+        client_socket.connect((host, port)) 
+        client_socket.sendall(message.encode()) 
+        print(f"Sent: {message}") 
+ 
+if __name__ == "__main__": 
+    send_message()
+
+
+
+network scanning.
+
+CODING :  
+ 
+import os  
+import platform 
+from datetime import datetime 
+ 
+net = input("Enter the Network Address: ")  
+net1= net.split('.') 
+a = '.' 
+net2 = net1[0] + a + net1[1] + a + net1[2] + a  
+st1 = int(input("Enter the Starting Number: "))  
+en1 = int(input("Enter the Last Number: "))  
+en1 = en1 + 1 
+oper = platform.system() 
+if (oper == "Windows"):  
+    ping1 = "ping -n 1 " 
+elif (oper == "Linux"):  
+    ping1 = "ping -c 1 " 
+else: 
+    ping1 = "ping -c 1 " 
+ 
+t1 = datetime.now() 
+print("Scanning in Progress:") 
+ 
+for ip in range(st1, en1): 
+    addr = net2 + str(ip) 
+    comm = ping1 + addr 
+    response = os.popen(comm) 
+    for line in response.readlines(): 
+        if(line.count("TTL")): 
+            break 
+    if (line.count("TTL")): 
+        print(addr, "--> Live") 
+ 
+t2 = datetime.now() 
+total = t2 - t1 
+print("Scanning completed in: ", total) 
+ 
+# Threaded port scanning 
+import socket 
+import time  
+import threading 
+from queue import Queue 
+ 
+socket.setdefaulttimeout(0.25)  
+print_lock = threading.Lock() 
+ 
+target = input('Enter the host to be scanned: ')  
+t_IP = socket.gethostbyname(target) 
+print('Starting scan on host: ', t_IP) 
+ 
+def portscan(port): 
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+    try: 
+        con = s.connect((t_IP, port))  
+        with print_lock: 
+            print(port, 'is open')  
+        con.close() 
+    except: 
+        pass 
+ 
+def threader(): 
+    while True: 
+        worker = q.get()  
+        portscan(worker)  
+        q.task_done() 
+ 
+q = Queue() 
+startTime = time.time() 
+for x in range(100): 
+    t = threading.Thread(target = threader)  
+    t.daemon = True 
+    t.start() 
+for worker in range(1, 500): 
+    q.put(worker)  
+q.join() 
+print('Time taken:', time.time() - startTime) 
+
+
+
+
+ social media platform with UI tune.
+
+CODING : 
+// /src/App.js 
+import React, { useState } from 'react'; 
+import MessageList from './components/MessageList'; 
+import MessageInput from './components/MessageInput'; 
+const App = () => { 
+const [messages, setMessages] = useState([]); 
+const handleSendMessage = (message) => { 
+setMessages([...messages, message]); 
+}; 
+return ( 
+<div className="App"> 
+<MessageList messages={messages} /> 
+<MessageInput onSendMessage={handleSendMessage} /> 
+</div> 
+); 
+}; 
+export default App; 
+// /src/App.css 
+.App { 
+text-align: center; 
+} 
+.App-logo { 
+height: 40vmin; 
+ 
+pointer-events: none; 
+} 
+@media (prefers-reduced-motion: no-preference) { 
+.App-logo { 
+animation: App-logo-spin infinite 20s linear; 
+} 
+} 
+.App-header { 
+background-color: #282c34; 
+min-height: 100vh; 
+display: flex; 
+flex-direction: column; 
+align-items: center; 
+justify-content: center; 
+font-size: calc(10px + 2vmin); 
+color: white; 
+} 
+.App-link { 
+color: #61dafb; 
+} 
+@keyframes App-logo-spin { 
+from { 
+transform: rotate(0deg); 
+} 
+to { 
+transform: rotate(360deg); 
+} 
+} 
+//  /src/components/MessageList.js 
+import React from 'react'; 
+import './MessageList.css'; // Import the CSS file 
+const MessageList = ({ messages }) => { 
+return ( 
+<div className="message-list"> 
+{messages.map((message, index) => ( 
+<div key={index} className="message"> 
+{message} 
+</div> 
+))} 
+</div> 
+); 
+}; 
+export default MessageList;  
+/* MessageList.css */ 
+.message-list { 
+border: 1px solid #ccc; 
+padding: 10px; 
+max-height: 300px; 
+overflow-y: auto; 
+} 
+.message { 
+margin-bottom: 10px; 
+padding: 5px; 
+background-color: #f0f0f0; 
+border-radius: 5px; 
+} 
+// /src/components/MessageInput.js 
+import React, { useState } from 'react'; 
+import './MessageInput.css'; // Import the CSS file 
+const MessageInput = ({ onSendMessage }) => { 
+const [message, setMessage] = useState(''); 
+const handleChange = (event) => { 
+setMessage(event.target.value); 
+}; 
+const handleSubmit = (event) => { 
+event.preventDefault(); 
+if (message.trim() !== '') { 
+onSendMessage(message); 
+setMessage(''); 
+} 
+}; 
+return ( 
+<form onSubmit={handleSubmit}> 
+<input 
+type="text" 
+placeholder="Type a message..." 
+value={message} 
+onChange={handleChange} 
+/> 
+<button type="submit">Send</button> 
+</form> 
+); 
+}; 
+export default MessageInput; 
+/* MessageInput.css */ 
+form { 
+display: flex; 
+margin-top: 10px; 
+} 
+input { 
+flex: 1; 
+padding: 5px; 
+border: 1px solid #ccc; 
+border-radius: 5px; 
+} 
+button { 
+padding: 5px 10px; 
+border: 1px solid #ccc; 
+border-radius: 5px; 
+margin-left: 5px; 
+} 
+
+
+
+
+
+
+ javascript app as portfolio and install the app in a server with network access.
+
+
+CODING : 
+// src/App.js 
+import React from 'react'; 
+import Introduction from './components/Introduction'; 
+import Skills from './components/Skills'; 
+import Projects from './components/Projects'; 
+import Contact from './components/Contact'; 
+import './App.css'; 
+const App = () => { 
+return ( 
+<div className="App"> 
+<Introduction /> 
+<Skills /> 
+<Projects /> 
+<Contact /> 
+</div> 
+); 
+}; 
+export default App; 
+/* src/App.css */ 
+body { 
+font-family: Arial, sans-serif; 
+} 
+section { 
+margin-bottom: 50px; 
+} 
+ul { 
+list-style: none; 
+padding: 5; 
+} 
+li { 
+margin-bottom: 5px; 
+} 
+// src/components/Introduction.js 
+import React from 'react'; 
+const Introduction = () => { 
+return ( 
+<section> 
+<h1>Hello, I'm Karthik</h1> 
+<p>GREY HAT HACKER</p> 
+</section> 
+); 
+}; 
+export default Introduction; 
+// src/components/Contact.js 
+import React from 'react'; 
+const Contact = () => { 
+return ( 
+<section> 
+<h2>Contact</h2> 
+<p>Email: ethicalmentor101@gmail.com</p> 
+<p>LinkedIn: <a href="your-linkedin-profile">Your LinkedIn</a></p> 
+</section> 
+); 
+}; 
+export default Contact; 
+// src/components/Projects.js 
+import React from 'react'; 
+const Projects = () => { 
+return ( 
+<section> 
+<h2>Projects</h2> 
+<ul> 
+<li> 
+<a href="project1-link">Project 1</a> 
+</li> 
+<li> 
+<a href="project2-link">Project 2</a> 
+ 
+</li> 
+{/* Add more projects */} 
+</ul> 
+</section> 
+); 
+}; 
+export default Projects; 
+ 
+// src/components/Skills.js 
+import React from 'react'; 
+const Skills = () => { 
+return ( 
+<section> 
+<h2>Skills</h2> 
+<ul> 
+<li>CEH</li> 
+<li>CHFI</li> 
+<li>JavaScript, Wireless Pentest</li> 
+{/* Add more skills */} 
+</ul> 
+</section> 
+); 
+}; 
+export default Skills; 
+
+
+
+
+
+
+ Node app with JavaScript. 
+
+CODING : 
+// /src/App.js 
+import logo from './logo.svg'; 
+import './App.css'; 
+function App() { 
+return ( 
+<div className="App"> 
+<header className="App-header"> 
+<img src={logo} className="App-logo" alt="logo" /> 
+<p> 
+Edit <code>src/App.js</code> and save to reload. 
+</p> 
+<a 
+className="App-link" 
+href="https://reactjs.org" 
+target="_blank" 
+rel="noopener noreferrer" 
+> 
+Learn React 
+</a> 
+</header> 
+</div> 
+); 
+} 
+export default App; 
+// /src/App.css 
+.App { 
+text-align: center; 
+} 
+ 
+.App-logo { 
+height: 40vmin; 
+pointer-events: none; 
+} 
+@media (prefers-reduced-motion: no-preference) { 
+.App-logo { 
+animation: App-logo-spin infinite 20s linear; 
+} 
+} 
+.App-header { 
+background-color: #282c34; 
+min-height: 100vh; 
+display: flex; 
+flex-direction: column; 
+align-items: center; 
+justify-content: center; 
+font-size: calc(10px + 2vmin); 
+color: white; 
+} 
+.App-link { 
+color: #61dafb; 
+} 
+@keyframes App-logo-spin { 
+from { 
+transform: rotate(0deg); 
+} 
+to { 
+transform: rotate(360deg); 
+} 
+} 
+// /src/index.js 
+import React from 'react'; 
+import ReactDOM from 'react-dom/client'; 
+import './index.css'; 
+import App from './App'; 
+import reportWebVitals from './reportWebVitals'; 
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render( 
+<React.StrictMode> 
+<App /> 
+</React.StrictMode> 
+); 
+// If you want to start measuring performance in your app, pass a function 
+// to log results (for example: reportWebVitals(console.log)) 
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals 
+reportWebVitals(); 
+// /src/index.css 
+body { 
+margin: 0; 
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 
+'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 
+sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
+} 
+code { 
+font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', 
+monospace; 
+}
+
+
+
+
+
+
+
+
+ ES6 forms page Web-app with JavaScript.
+
+CODING : 
+// src/App.js 
+import React from 'react'; 
+import LoginForm from './components/LoginForm'; 
+import './App.css'; 
+const App = () => { 
+return ( 
+<div className="App"> 
+<LoginForm /> 
+</div> 
+); 
+}; 
+export default App; 
+/* src/App.css */ 
+body { 
+font-family: Arial, sans-serif; 
+} 
+form { 
+display: flex; 
+flex-direction: column; 
+max-width: 300px; 
+margin: 0 auto; 
+} 
+label { 
+margin-bottom: 5px; 
+} 
+input { 
+padding: 10px; 
+margin-bottom: 10px; 
+} 
+button { 
+padding: 10px; 
+} 
+// src/components/LoginForm.js 
+import React, { useState } from 'react'; 
+const LoginForm = () => { 
+const [username, setUsername] = useState(''); 
+const [password, setPassword] = useState(''); 
+const [error, setError] = useState(''); 
+const handleLogin = (e) => { 
+e.preventDefault(); 
+// Basic validation 
+if (username.trim() === '' || password.trim() === '') { 
+setError('Please enter both username and password.'); 
+} else { 
+// You can handle the login logic here 
+// For simplicity, we'll just log the credentials 
+alert('Logged in with: ' + username + ' : ' + password); 
+setError(''); 
+} 
+}; 
+return ( 
+<div> 
+<h2>Login</h2> 
+<form onSubmit={handleLogin}> 
+<div> 
+<label htmlFor="username">Username:</label> 
+<input 
+type="text" 
+id="username" 
+value={username} 
+onChange={(e) => setUsername(e.target.value)} 
+/> 
+</div> 
+<div> 
+<label htmlFor="password">Password:</label> 
+<input 
+type="password" 
+id="password" 
+value={password} 
+onChange={(e) => setPassword(e.target.value)} 
+/> 
+</div> 
+<button type="submit">Login</button> 
+</form> 
+{error && <div style={{ color: 'red' }}>{error}</div>} 
+</div> 
+); 
+}; 
+export default LoginForm; 
